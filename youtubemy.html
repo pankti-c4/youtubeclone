@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>youtube.com clone</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet">
+    
+     
+    <style>
+    body {
+        margin: 0;
+        padding-top: 80px;
+        padding-left: 96px;
+        padding-right: 24px;
+        background-color: rgb(248, 248, 248);
+        padding-bottom: 10px;
+    }
+    p{
+        font-family: Roboto, Arial;
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    img.profile {
+         width: 41px;
+        height: 41px; 
+        /* width: 100%; */
+        border-radius: 50%;
+    }
+     
+     .thumbnail{
+        /* width: 300px;
+        display:block;    */
+        width: 100%;
+     }
+
+     .vedio-title{
+        font-weight: 700;
+        font-size: 15px;
+        margin-top: 0;
+        line-height: 20px;
+        margin-bottom: 10px;
+     }
+     
+     /* after setting dispay grid remove vedio preview */
+     /* .vedio-preview {
+         width: 300px;
+        display: inline-block;
+        vertical-align: top; 
+        margin-right: 15px;
+     } */
+
+      .vedio-info-grid{
+      display:grid;
+      grid-template-columns: 50px 1fr;
+      
+     } 
+     /* first set this properties and then move to grid */
+      /* .channel-picture{
+       display: inline-block;
+       width: 50px;
+       vertical-align: top;
+       background-color: grey;
+     }
+     .vedio-info{
+      display: inline-block;
+      width: 245px;
+      background-color: gray;
+     }  */
+
+
+    .thumbnail-row{
+        margin-bottom: 8px;
+        position: relative;
+    }
+    .author-name{
+        margin-bottom: 4px;
+        font-size: 12px;
+        color: rgb(97, 95, 95);
+    }
+    .vedio-stats{
+        font-size: 12px;
+        color: rgb(97, 95, 95);
+    }
+
+    .vedio-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        column-gap: 20px;
+        row-gap: 38px;
+    }
+
+    /* header css */
+
+    .header{
+     height: 55px;
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+     position: fixed;
+     top: 0;
+     right: 0;
+     left: 0;
+     background-color: white;
+     border-bottom-width:1px ;
+     border-bottom-style:solid ;
+     border-bottom-color:rgb(235, 220, 220) ;
+     z-index:100;
+     
+     }
+
+     .left-section{
+        display: flex;
+        align-items: center;
+     }
+     .menu{
+   
+      height: 30px;
+      margin-left: 10px;
+      margin-bottom: 2px;
+      margin-right: 8px;
+      color: black;
+     }
+     .youtubelogo{
+        width: 130px;
+      }
+
+     .middle-section{
+        /* background-color: lightpink; */
+        flex: 1;
+        margin-left: 80px;
+        margin-right: 40px;
+        max-width: 600px;
+        display: flex;
+        align-items:center;
+     }
+
+     .search-bar{
+      display: flex;
+      flex: 1;
+      height: 37px;
+      font-size: 13px;
+      padding-left: 10px;
+      border-width: 1px;
+      border-style: solid;
+      border-color: rgb(192, 192, 192);
+      border-radius: 2px;
+      box-shadow: inset 2px 2px 2px rgba(0, 0, 0, 0.05);
+      width: 0;
+     }
+     .search-bar::placeholder {
+      font-family: Roboto,Arial;
+      font-size: 16px;
+      /* padding-left: 10px; */
+     }
+
+
+      .search-button{
+         height: 40px;
+         width: 66px;
+         border-width: 1px;
+         border-style: solid;
+      border-color: rgb(192, 192, 192);
+      margin-left: -1px;
+      background-color: rgb(240,240,240);
+      margin-right: 10px;
+
+      
+   }
+   .search-button, .mic-button,.app-button,.creat-button,.notification-container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      
+   }
+
+
+   .search-button .tooltip,
+   .mic-button .tooltip,
+   .app-button .tooltip,
+   .creat-button .tooltip,
+   .notification-container .tooltip{
+      position: absolute;
+      background-color: gray;
+      color: white;
+      padding-left:8px ;
+      padding-right:8px ;
+      padding-top:4px ;
+      padding-bottom:4px ;
+      border-radius: 2px;
+      font-size: 12px;
+      bottom: -30px;
+      opacity: 0;
+      transition: 0.15s;
+      pointer-events: none;
+      white-space: nowrap;
+     
+   }
+
+   .search-button:hover .tooltip,
+   .mic-button:hover .tooltip,
+   .creat-button:hover .tooltip,
+   .app-button:hover .tooltip,
+   .notification-container:hover .tooltip{
+      opacity: 1;
+     
+   }
+
+
+   .mic-button{
+         height: 45px;
+         width: 45px;
+         border-radius: 20px;
+         background-color: rgb(240,240,240);
+         border: none;
+   }
+      #search{
+      height: 25px;
+      }
+      #mic{
+         height: 25px;
+      }
+
+      .right-section{
+       width: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-right: 24px;
+      flex-shrink:0;
+      }
+
+      .vedio-call{
+         display: flex;
+      height: 25px;
+      }
+
+      .apps{
+         display: flex;
+      height: 25px;
+      }
+
+      .notifications{
+         display: flex;
+       height: 25px;
+      }
+
+      img.pro{
+      height: 32px;
+      width: 32px;
+      border-radius: 50%;
+      margin-top: 5px;
+      }
+
+      /* sidebar */
+     .sidebar{
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      top: 55px;
+      background-color: white;
+      width: 75px;
+      z-index:200;
+      padding-top: 5px;
+      
+
+     }
+
+     .sidebar-link{
+      height: 70px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 5px;
+      z-index: 200;
+      cursor: pointer;
+      margin-bottom: 10px;
+     }
+     .sidebar-link:hover{
+      background-color: rgb(235, 212, 212);
+     }
+
+
+
+     /* vedio-time */
+
+     .vedio-time{
+      font-family: Roboto,arial;
+      font-size: 12px;
+      font-weight: 500;
+      background-color: black;
+      color: white;
+      position: absolute;
+      bottom: 10px;
+      right: 8px;
+      padding-top:4px ;
+      padding-bottom:4px ;
+      padding-left: 4px ;
+      padding-right:4px ;
+      border-radius: 2px;  
+     }
+
+     .notification-container{
+     position: relative;
+     }
+    .notification-count{
+      position: absolute;
+      top:-2px;
+      right:-4px;
+      color:white;
+      background-color: rgb(191, 6, 6);
+      font-family: Roboto,Arial;
+      font-size: 10px;
+      padding-top:3px;
+      padding-bottom:3px;
+      padding-right:5px;
+      padding-left:5px;
+      border-radius: 9px;
+
+    }
+
+    .sidebar-link img{
+      height: 30px;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-link div{
+      font-family: roboto,arial;
+      font-size: 10px;
+    }
+
+    
+
+    </style>
+    
+</head>
+<body>
+
+    <div class="header">
+        <div class="left-section">
+            <img src="youtubeicon/men100.png" class="menu" alt="">
+            <img class="youtubelogo" src="youtubeicon/youtubelogo2.png" alt="">       
+        </div>
+
+
+        <div class="middle-section">
+         <input class="search-bar" type="text" placeholder="Search">
+      <button class="search-button"> <i class="material-icons" id="search"> search </i><div class="tooltip">Search</div> </button>
+      <button class="mic-button">  <i class="material-icons" id="mic"> mic </i><div class="tooltip">Search with your voice</div> </button>
+      </div>
+
+
+        <div class="right-section">
+
+         <div class="creat-button">
+         <img src="youtubeicon/darkvedio.png" class="vedio-call" alt=""><div class="tooltip">Creat</div></div>
+
+         <div class="app-button">
+         <img src="youtubeicon/apps.png"  class="apps" alt=""> <div class="tooltip">Apps</div></div>
+
+         <div class="notification-container">  
+         <img src="youtubeicon/notifica.png" class="notifications" alt="">
+         <div class="notification-count">3</div>
+         <div class="tooltip">Notifications</div>
+         </div>
+         
+         <img src="youtubeicon/unnamed.jpg" class="pro" alt="">
+         </div>
+
+    </div>
+
+    <div  class="sidebar">
+      <div class="sidebar-link"><img src="youtubeicon/home.png" alt=""><div>Home</div></div>
+      <div class="sidebar-link"><img src="youtubeicon/explore.png" alt=""><div>Explore</div></div>
+      <div class="sidebar-link"><img src="youtubeicon/subscriptions4.png" alt=""><div>Subscriptions</div></div>
+      <div class="sidebar-link"><img src="youtubeicon/originals.png" alt=""><div>Originals</div></div>
+      <div class="sidebar-link"><img src="youtubeicon/youtube-music-50.png" alt=""><div>Youtube Music</div></div>
+      <div class="sidebar-link"><img src="youtubeicon/video4.png" alt=""><div>Library</div></div>
+    </div>
+
+    
+    <div class="vedio-grid">
+<!-- 1 -->
+    <!-- nested layout -->
+    <div class="vedio-preview" >
+
+        <!-- vertical layout -->
+        
+           <div class="thumbnail-row"> <img class="thumbnail" src="image folder/book.jpg" alt="book">
+         <div class="vedio-time">14:08</div>
+        </div>
+           
+            <!-- horizontal layout -->
+            <div class="vedio-info-grid">
+            <div class="channel-picture"><img class="profile"  src="youtubeprofile/johnfish.jpg" alt="book"></div>
+
+         <div class="vedio-info"><p class="vedio-title">Top 10 books you should read to improve your mental health.</p>
+            <p class="author-name">John Fish</p>
+            <p class="vedio-stats">338K views &#183; 2 years ago</p></div>
+             
+            </div>
+   </div>
+   <!-- 2 -->
+
+     <!-- nested layout -->
+     <div class="vedio-preview">
+
+        <!-- vertical layout -->
+        
+           <div class="thumbnail-row"> <img class="thumbnail" src="image folder/cric.jpg" alt="book">
+            <div class="vedio-time">7:12</div>
+         </div>
+           <div class="vedio-info-grid"> 
+            <!-- horizontal layout -->
+            <div class="channel-picture"><img class="profile"  src="youtubeprofile/abhiandniyu.jpg" alt="book"></div>
+
+         <div class="vedio-info"><p class="vedio-title">India vs Pakishtan - The greatest CRICKET rivalry explained | Abhi and Niyu</p>
+            <p class="author-name">Abhi and Niyu</p>
+            <p class="vedio-stats">843K views &#183; 8 days ago</p></div>
+            </div>
+    </div>
+
+            <!-- 3 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/switzerland.jpg" alt="book">
+                     <div class="vedio-time">40:09</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/swiss.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">Best places to visit in switzerland.</p>
+                    <p class="author-name">swiss life</p>
+                    <p class="vedio-stats">437K views &#183; 2 months ago</p></div>
+                 </div>
+        </div>
+
+        
+            <!-- 4 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/yoga.jpg" alt="book">
+                     <div class="vedio-time">12:22</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/yoga.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">30 min daily yoga for back pain relief.</p>
+                    <p class="author-name">Yoga with Adrine</p>
+                    <p class="vedio-stats">999K views &#183; 3 days ago</p></div>
+                 </div>
+        </div>
+
+
+            <!-- 5 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/haird.jpg" alt="book">
+                     <div class="vedio-time">45:08</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/preityprerna.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">Best hair oil and food for growing hair fast.</p>
+                    <p class="author-name">Preity Prerna</p>
+                    <p class="vedio-stats">11m views &#183; year ago</p></div>
+                 </div>
+        </div>
+
+
+            <!-- 6 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/vegan.jpg" alt="book">
+                     <div class="vedio-time">29:11</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/cook.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">What i eat in a day as a vegan.</p>
+                    <p class="author-name">Cooking show</p>
+                    <p class="vedio-stats">84K views &#183; 9 months ago</p></div>
+                 </div>
+        </div>
+
+
+            <!-- 7 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/lov.jpg" alt="book">
+                     <div class="vedio-time">5:06</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/sango.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">social media poisoning and increasing distance in relationship</p>
+                    <p class="author-name">Sango life sutras</p>
+                    <p class="vedio-stats">240K views &#183; 1 year ago</p></div>
+                 </div>
+        </div>
+
+
+            <!-- 8 -->
+            <div class="vedio-preview">
+
+                <!-- vertical layout -->
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/spiritual.jpg" alt="book">
+                     <div class="vedio-time">33:08</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    <!-- horizontal layout -->
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/ranveer.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">how to follow a path of spirituality.</p>
+                    <p class="author-name">Ranveer Allahbadia</p>
+                    <p class="vedio-stats">3m views &#183; 23 days ago</p></div>
+                 </div>
+        </div>
+
+
+            
+            <!-- <div class="vedio-preview">
+
+                vertical layout
+                
+                   <div class="thumbnail-row"> <img class="thumbnail" src="image folder/switzerland.jpg" alt="book">
+                     <div class="vedio-time">2:08</div>
+                  </div>
+                   <div class="vedio-info-grid"> 
+                    horizontal layout
+                    <div class="channel-picture"><img class="profile"  src="youtubeprofile/swiss.jpg" alt="book"></div>
+        
+                 <div class="vedio-info"><p class="vedio-title">India vs Pakishtan - The greatest CRICKET rivalry explained | Abhi and Niyu</p>
+                    <p class="author-name">Abhi and Niyu</p>
+                    <p class="vedio-stats">843K views &#183; 8 days ago</p></div>
+                 </div> -->
+             
+        </div>
+
+        </div>
+
+
+
+
+
+    
+    
+    
+</body>
+</html>
